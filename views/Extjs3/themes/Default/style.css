@@ -1,0 +1,12 @@
+.go-module-icon-orders , .go-menu-icon-orders{
+	background:url('images/order.png');
+}
+
+.go-tab-icon-orders {
+	background-image: none !important;
+}
+
+.go-model-icon-GO_Orders_Model_Order{
+	background-image: url('images/order.png') !important;
+}
+
