@@ -1,3 +1,4 @@
+modules/orders/views/Extjs3/FilterPanel.js
 modules/orders/views/Extjs3/OrdersGrid.js
 modules/orders/views/Extjs3/OrderDialog.js
 modules/orders/views/Extjs3/OrderPanel.js

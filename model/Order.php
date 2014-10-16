@@ -18,8 +18,8 @@
  * 
  * @property int $id
  * @property int $files_folder_id
- * @property string $content
  * @property string $name
+ * @property string $content
  * @property int $mtime
  * @property int $muser_id
  * @property int $ctime
@@ -34,13 +34,16 @@ class GO_Orders_Model_Order extends GO_Base_Db_ActiveRecord {
 	}
 	
 	protected function init() {
-		$this->columns['name']['required']=true;
-		
+        $this->columns['name']['required']=false;
 		return parent::init();
 	}
-	
+
 	public function getLocalizedName(){
 		return GO::t('order','orders');
+	}
+
+	public function aclField(){
+		return false;
 	}
 	
 	public function tableName(){
@@ -60,19 +63,21 @@ class GO_Orders_Model_Order extends GO_Base_Db_ActiveRecord {
 	}
 
 	public function relations(){
-		return array();
+		return array(
+            'partner' => array('type'=>self::BELONGS_TO, 'model'=>'GO_Addressbook_Model_Company', 'field'=>'partner_id')
+        );
 	}
 
 	protected function getCacheAttributes() {
 		return array(
-				'name' => $this->name,
-				'description'=>''
+            'name' => ($this->active ? json_decode('"\u2714 "') : "") .
+                GO::t('order', 'orders') . ' #' . $this->id, 
+            'description'=> $this->partner->name 
 		);
 	}
 	
 	public function buildFilesPath() {
-		return 'orders/' . GO_Base_Fs_Base::stripInvalidChars($this->category->name) . 
-            '/' . date('Y', $this->ctime) . '/' . GO_Base_Fs_Base::stripInvalidChars($this->name).' ('.$this->id.')';
+		return 'orders/' . date('Y', $this->ctime) . '/' . $this->id;
 	}
 	
 }

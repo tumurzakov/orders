@@ -32,11 +32,22 @@ GO.orders.OrderPanel = Ext.extend(GO.DisplayPanel,{
 
 				'<table class="display-panel" cellpadding="0" cellspacing="0" border="0">'+
 					'<tr>'+
-						'<td colspan="2" class="display-panel-heading">'+GO.orders.lang.order+': {name}</td>'+
+						'<td colspan="2" class="display-panel-heading">'+GO.orders.lang.order+': #{id}</td>'+
 					'</tr>'+
 					'<tr>'+
-						'<td>ID:</td>'+
-						'<td>{id}</td>'+
+						'<td>'+GO.orders.lang.partner+':</td>'+
+						'<td>{partner_name}</td>'+
+					'</tr>'+
+					'<tr>'+
+						'<td>'+GO.orders.lang.cost_price+':</td>'+
+						'<td>{cost_price}</td>'+
+					'</tr>'+
+					'<tr>'+
+						'<td>'+GO.orders.lang.sell_price+':</td>'+
+						'<td>{sell_price}</td>'+
+					'</tr>'+
+					'<tr>'+
+						'<td colspan="2">{content}</td>'+
 					'</tr>'+
 				'</table>';																		
 				

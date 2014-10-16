@@ -27,7 +27,7 @@ GO.orders.OrdersGrid = function(config){
 		root: 'results',
 		id: 'id',
 		totalProperty:'total',
-		fields: ['id','user_name','ctime','mtime','name','content'],
+		fields: ['id','active', 'partner_name', 'cost_price', 'sell_price', 'user_name','ctime','mtime','content'],
 		remoteSort: true,
 		model:"GO_Orders_Model_Order"
 	});
@@ -44,10 +44,33 @@ GO.orders.OrdersGrid = function(config){
 
 	config.columns=[
 		{
-			header: GO.lang.strName,
-			dataIndex: 'name',
+			header: GO.orders.lang.order,
+			dataIndex: 'id',
 			sortable: true
 		},
+		{
+			header: GO.orders.lang.partner,
+			dataIndex: 'partner_name',
+			sortable: true
+		},
+		{
+			header: GO.orders.lang.cost_price,
+			dataIndex: 'cost_price',
+			sortable: true
+		},
+		{
+			header: GO.orders.lang.sell_price,
+			dataIndex: 'sell_price',
+			sortable: true
+		},
+		{
+			header: GO.orders.lang.active,
+			dataIndex: 'active',
+            width: 40,
+            renderer: function(str) { return str == '1' ? '&#x2714;' : ''; },
+			sortable: true
+		},
+
 		{
 			header: GO.lang.strOwner,
 			dataIndex: 'user_name',
@@ -73,13 +96,6 @@ GO.orders.OrdersGrid = function(config){
 	
 	config.sm=new Ext.grid.RowSelectionModel();
 	config.loadMask=true;
-	
-	this.searchField = new GO.form.SearchField({
-		store: config.store,
-		width:320
-	});
-		    	
-	config.tbar = [GO.lang['strSearch'] + ':', this.searchField];
 	
 	GO.orders.OrdersGrid.superclass.constructor.call(this, config);
 };

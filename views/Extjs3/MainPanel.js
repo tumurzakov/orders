@@ -19,22 +19,19 @@ GO.orders.MainPanel = function(config){
 		config = {};
 	}
 
-	this.westPanel= new Ext.Panel({
-		region:'west',
-        id: 'or-west-panel',
-		title:GO.orders.lang.filter,
-        items:[{
-            border: false,
-            html: 'Filter'
-        }],
-		width: 210,
-		split:false
-	});
-
 	this.centerPanel = new GO.orders.OrdersGrid({
 		region:'center',
-		id:'no-center-panel',
+		id:'or-center-panel',
 		border:true
+	});
+
+	this.westPanel= new GO.orders.FilterPanel({
+		region:'west',
+        id: 'or-west-panel',
+		width: 300,
+		border:true,
+		split:true,
+		relatedStore: this.centerPanel.store
 	});
 	
 	this.centerPanel.on("delayedrowselect",function(grid, rowIndex, r){
@@ -44,7 +41,7 @@ GO.orders.MainPanel = function(config){
 	this.centerPanel.on('rowdblclick', function(grid, rowIndex){
 		this.eastPanel.editHandler();
 	}, this);
-	
+
 	this.eastPanel = new GO.orders.OrderPanel({
 		region:'east',
 		id:'or-east-panel',
@@ -60,6 +57,7 @@ GO.orders.MainPanel = function(config){
 		items: [{
 			grid: this.centerPanel,
 			xtype:'addbutton',
+            ignoreButtonParams: true,
 			handler: function(b){
 				this.eastPanel.reset();
 
@@ -69,6 +67,7 @@ GO.orders.MainPanel = function(config){
 		},{
 			xtype:'deletebutton',
 			grid:this.centerPanel,
+            ignoreButtonParams: true,
 			handler: function(){
 				this.centerPanel.deleteSelected({
 					callback : this.eastPanel.gridDeleteCallback,
@@ -92,8 +91,10 @@ GO.orders.MainPanel = function(config){
 
 
 Ext.extend(GO.orders.MainPanel, Ext.Panel, {
-	afterRender : function()
-	{
+	afterRender : function() {
+
+        this.centerPanel.store.load();
+
 		GO.dialogListeners.add('order',{
 			scope:this,
 			save:function(){
@@ -114,22 +115,10 @@ GO.orders.showOrderDialog = function(order_id, config){
 }
 
 
-/*
- * This will add the module to the main tabpanel filled with all the modules
- */
- 
 GO.moduleManager.addModule('orders', GO.orders.MainPanel, {
 	title : GO.orders.lang.orders,
 	iconCls : 'go-tab-icon-orders'
 });
-/*
- * If your module has a linkable item, you should add a link handler like this. 
- * The index (no. 1 in this case) should be a unique identifier of your item.
- * See classes/base/links.class.inc for an overview.
- * 
- * Basically this function opens a project window when a user clicks on it from a 
- * panel with links. 
- */
 
 GO.linkHandlers["GO_Orders_Model_Order"]=function(id){
 	if(!GO.orders.linkWindow){

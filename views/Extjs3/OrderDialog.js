@@ -19,7 +19,7 @@ GO.orders.OrderDialog = Ext.extend(GO.dialog.TabbedFormDialog , {
 	initComponent : function(){
 		
 		Ext.apply(this, {
-			titleField:'name',
+			titleField:'id',
 			goDialogId:'order',
 			title:GO.orders.lang.order,
 			height: 560,
@@ -30,6 +30,20 @@ GO.orders.OrderDialog = Ext.extend(GO.dialog.TabbedFormDialog , {
 	},
 	
 	buildForm : function () {
+
+        this.selectCompanyId = new Ext.form.Hidden({
+            name: 'partner_id'
+        });
+
+        this.selectCompany = new GO.addressbook.SelectCompany({
+            name: 'partner_name',
+            fieldLabel: GO.orders.lang.partner,
+			anchor:'100%'
+        });
+
+        this.selectCompany.on('change', function() {
+            this.selectCompanyId.setValue(this.selectCompany.getValue());
+        }, this);
 		
 		this.selectLinkField = new GO.form.SelectLink({
 			anchor:'100%'
@@ -41,15 +55,33 @@ GO.orders.OrderDialog = Ext.extend(GO.dialog.TabbedFormDialog , {
 			layout:'form',
 			labelWidth:160,
 			items:[{
+				xtype: 'hidden',
+				name: 'name'
+			}, this.selectLinkField,
+            this.selectCompanyId,
+            this.selectCompany, {
 				xtype: 'textfield',
-				name: 'name',
-				width:300,
+				name: 'cost_price',
+				width: 300,
 				anchor: '100%',
 				maxLength: 100,
 				allowBlank:false,
-				fieldLabel: GO.lang.strName
+				fieldLabel: GO.orders.lang.cost_price
+			}, {
+				xtype: 'textfield',
+				name: 'sell_price',
+				width: 300,
+				anchor: '100%',
+				maxLength: 100,
+				allowBlank:false,
+				fieldLabel: GO.orders.lang.sell_price
+			}, {
+				xtype: 'checkbox',
+				name: 'active',
+				anchor: '100%',
+				fieldLabel: GO.orders.lang.active
 			},
-			this.selectLinkField,
+
 			this.contentField = new Ext.form.TextArea({
 				name: 'content',
 				anchor: '100%',
