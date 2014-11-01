@@ -3,4 +3,6 @@ modules/orders/views/Extjs3/OrdersGrid.js
 modules/orders/views/Extjs3/OrderDialog.js
 modules/orders/views/Extjs3/OrderPanel.js
 modules/orders/views/Extjs3/Stores.js
+modules/orders/views/Extjs3/SelectOrderGrid.js
+modules/orders/views/Extjs3/SelectOrderDialog.js
 modules/orders/views/Extjs3/MainPanel.js

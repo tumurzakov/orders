@@ -72,7 +72,7 @@ class GO_Orders_Model_Order extends GO_Base_Db_ActiveRecord {
 		return array(
             'name' => ($this->active ? json_decode('"\u2714 "') : "") .
                 GO::t('order', 'orders') . ' #' . $this->id, 
-            'description'=> $this->partner->name 
+            'description'=> @$this->partner->name 
 		);
 	}
 	

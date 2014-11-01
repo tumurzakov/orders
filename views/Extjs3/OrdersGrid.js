@@ -27,7 +27,7 @@ GO.orders.OrdersGrid = function(config){
 		root: 'results',
 		id: 'id',
 		totalProperty:'total',
-		fields: ['id','active', 'partner_name', 'cost_price', 'sell_price', 'user_name','ctime','mtime','content'],
+		fields: ['id','active', 'partner_id', 'partner_name', 'cost_price', 'sell_price', 'user_name','ctime','mtime','content'],
 		remoteSort: true,
 		model:"GO_Orders_Model_Order"
 	});

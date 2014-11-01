@@ -29,8 +29,9 @@ GO.orders.MainPanel = function(config){
 		region:'west',
         id: 'or-west-panel',
 		width: 300,
-		border:true,
-		split:true,
+        collapsible: false,
+		border: true,
+		split: true,
 		relatedStore: this.centerPanel.store
 	});
 	
@@ -46,7 +47,7 @@ GO.orders.MainPanel = function(config){
 		region:'east',
 		id:'or-east-panel',
 		width:440,
-		collapsible:true,
+        collapsible: false,
 		collapseMode:'mini',
 		border:true,
         split: false,
@@ -88,7 +89,6 @@ GO.orders.MainPanel = function(config){
 	config.layout='border';
 	GO.orders.MainPanel.superclass.constructor.call(this, config);	
 };
-
 
 Ext.extend(GO.orders.MainPanel, Ext.Panel, {
 	afterRender : function() {

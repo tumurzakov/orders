@@ -87,9 +87,26 @@ GO.orders.OrderDialog = Ext.extend(GO.dialog.TabbedFormDialog , {
 				anchor: '100%',
 				height: 280,
 				hideLabel:true
-			})]				
+			}), {
+                xtype: 'button',
+                handler: this.fillHandler,
+                text: GO.orders.lang.fill,
+                scope: this
+            }]
 		});
 
 		this.addPanel(this.propertiesPanel);
-	}
+	},
+
+    fillHandler: function() {
+        this.selectOrderDialog = new GO.orders.SelectOrderDialog({});
+        this.selectOrderDialog.show();
+        this.selectOrderDialog.on('order_selected', this.orderSelectedHandler, this);
+    },
+
+    orderSelectedHandler: function(order) {
+        console.log(order);
+        this.formPanel.form.setValues(order);
+    }
+
 });
