@@ -72,16 +72,16 @@ class GO_Orders_Controller_Order extends GO_Base_Controller_AbstractModelControl
 	}
 
 	protected function afterSubmit(&$response, &$model, &$params, $modifiedAttributes) {		
-        if(GO::modules()->files){
-            $f = new GO_Files_Controller_Folder();
-            $f->processAttachments($response, $model, $params);
-        }		
-		return parent::afterSubmit($response, $model, $params, $modifiedAttributes);
+            if(GO::modules()->files){
+                $f = new GO_Files_Controller_Folder();
+                $f->processAttachments($response, $model, $params);
+            }		
+            return parent::afterSubmit($response, $model, $params, $modifiedAttributes);
 	}
 	
 	protected function beforeSubmit(&$response, &$model, &$params) {
-        $params['active'] = @$params['active'] == 'on' ? 1 : 0;
-		return parent::beforeSubmit($response, $model, $params);
+            $params['active'] = @$params['active'] == 'on' ? 1 : 0;
+            return parent::beforeSubmit($response, $model, $params);
 	}
 	
 	protected function beforeLoad(&$response, &$model, &$params) {		

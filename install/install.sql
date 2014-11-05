@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `or_orders` (
   `name` varchar(255),
   `content` text,
   `active` int(11),
-  `suplier_id` int(11) NOT NULL DEFAULT '0',
+  `partner_id` int(11) DEFAULT '0',
   `cost_price` double NOT NULL DEFAULT '0',
   `sell_price` double NOT NULL DEFAULT '0',
   `files_folder_id` int(11) NOT NULL DEFAULT '0',

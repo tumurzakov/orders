@@ -38,7 +38,7 @@ GO.orders.OrderDialog = Ext.extend(GO.dialog.TabbedFormDialog , {
         this.selectCompany = new GO.addressbook.SelectCompany({
             name: 'partner_name',
             fieldLabel: GO.orders.lang.partner,
-			anchor:'100%'
+            anchor:'100%'
         });
 
         this.selectCompany.on('change', function() {
